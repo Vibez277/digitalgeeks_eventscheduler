@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import AuthRouter from "./routes/auth_routes";
 import EventsRouter from "./routes/events_routes";
+import { Authenticate } from "./middleware/authenticate";
+import db from "./utils/db";
 dotenv.config();
 
 const corsOrigin = "https://digitalgeeks-eventscheduler.vercel.app/"
@@ -21,6 +23,24 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+app.get('/authorized',Authenticate,(req,res)=>{
+  const isAuthenticated = (req as unknown as {authenticated:boolean}).authenticated;
+    if(!isAuthenticated){
+        return res.json({message:"Unauthorized",success:false}).status(200);
+    }
+
+    const userId = (req as unknown as {userId:string}).userId;
+    const user = db.user.findUnique({
+      where:{
+        id:userId,
+      }
+    });
+    if(!user){
+      return res.json({message:"Unauthorized",success:false}).status(200);
+    }
+    return res.json({message:"success",success:true,user}).status(200);
+})
 
 //middleware
 

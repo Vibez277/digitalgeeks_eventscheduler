@@ -1,10 +1,12 @@
 "use client";
 import EventsView from "@/components/EventsView";
 import { AddContext } from "@/components/contexts/AddEventModalContext";
+import { AuthContext } from "@/components/contexts/AuthContext";
 import { IsNewContext } from "@/components/contexts/IsNewContext";
 import { ShowContext } from "@/components/contexts/ShowEventsContext";
 import { getDaysInMonth } from "@/utils/calendar";
 import dayjs, { Dayjs } from "dayjs";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -29,11 +31,18 @@ export default function Home() {
   const [days, setDays] = React.useState<
     { day: number; isNext: boolean; isPrev: boolean,dayOfWeek:number,isActive:boolean }[]
   >([]);
+  const router = useRouter()
   const [currentMonth, setcurrentMonth] = useState(date.getMonth());
   const [currentYear, setcurrentYear] = useState(date.getFullYear());
   const showSelf = useContext(ShowContext);
   const addModal = useContext(AddContext);
   const isNewContext = useContext(IsNewContext);
+  const auth = useContext(AuthContext);
+
+  if(!auth?.isAuthorized){
+    router.push('/auth/signin');
+    return;
+  }
 
   const [selected, setSelected] = useState<{
     date:number|undefined,
