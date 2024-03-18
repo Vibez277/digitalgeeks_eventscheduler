@@ -37,12 +37,6 @@ export default function Home() {
   const isNewContext = useContext(IsNewContext);
   const auth = useContext(AuthContext);
 
-  const e = !auth?.isAuthorized;// eslint-disable-line react-hooks/rules-of-hooks
-  if(!e){
-    router.push('/auth/signin');
-    return;
-  }
-
   const [selected, setSelected] = useState<{
     date:number|undefined,
     day:number|undefined,
@@ -85,6 +79,13 @@ export default function Home() {
   useEffect(() => {
     getDays();
   }, [currentMonth,isNewContext?.isNew===true]);
+
+  const e = !auth?.isAuthorized;// eslint-disable-line react-hooks/rules-of-hooks
+  if(!e){
+    router.push('/auth/signin');
+    return;
+  }
+
 
   return (
     <main className="min-h-screen w-full flex items-center gap-5">
