@@ -6,7 +6,7 @@ import AuthRouter from "./routes/auth_routes";
 import EventsRouter from "./routes/events_routes";
 dotenv.config();
 
-const corsOrigin = "http://localhost:3000"
+const corsOrigin = "https://digitalgeeks-eventscheduler.vercel.app/"
 const app = express();
 app.use(cors({
   origin:corsOrigin,
