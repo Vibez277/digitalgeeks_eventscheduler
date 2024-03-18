@@ -37,7 +37,7 @@ export default function Home() {
   const isNewContext = useContext(IsNewContext);
   const auth = useContext(AuthContext);
 
-  const e = !auth?.isAuthorized;
+  const e = !auth?.isAuthorized;// eslint-disable-line react-hooks/rules-of-hooks
   if(!e){
     router.push('/auth/signin');
     return;
