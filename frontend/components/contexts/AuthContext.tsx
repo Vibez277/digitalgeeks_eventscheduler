@@ -18,26 +18,28 @@ export const AuthContext = createContext<auth_context|null>(null);
 const AuthContextProvider = (props: Props) => {
     const [isAuthorized,setIsAuthorized] = useState(false);
     const [user,setUser] = useState(false);
-    async function checkAuth(){
-        try {
-          const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          });
-          const { message, success,user } = await res.json();
-          if (success) {
-            setIsAuthorized(true);
-            setUser(user)
-            return;
+    useEffect(()=>{
+        async function checkAuth(){
+            try {
+              const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                credentials: "include",
+              });
+              const { message, success,user } = await res.json();
+              if (success) {
+                setIsAuthorized(true);
+                setUser(user)
+                return;
+              }
+            } catch (error) {
+              console.error(error);
+            }
           }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      checkAuth();
+          checkAuth();
+    },[])
   return (
     <AuthContext.Provider value={{isAuthorized,setIsAuthorized,user}}>
         {
