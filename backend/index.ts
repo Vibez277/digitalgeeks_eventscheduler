@@ -8,7 +8,7 @@ import { Authenticate } from "./middleware/authenticate";
 import db from "./utils/db";
 dotenv.config();
 
-const corsOrigin = "https://digitalgeeks-eventscheduler.vercel.app/"
+const corsOrigin = "https://digitalgeeks-eventscheduler.vercel.app"
 const app = express();
 app.use(cors({
   origin:corsOrigin,
