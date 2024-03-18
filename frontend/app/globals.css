@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  body{
+    width: 100vw;
+    min-height: 100vh;
+  }
+  .bounce{
+    animation: bounce 150ms 2 forwards;
+  }
+  @keyframes bounce {
+    0%{
+      scale: 1;
+    }
+    50%{
+      scale: 0.95;
+    }
+    100%{
+      scale: 1;
+    }
+  }
+}
+
