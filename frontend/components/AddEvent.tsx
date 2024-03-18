@@ -24,7 +24,7 @@ const AddEvent = (props: Props) => {
       year: parseInt(data.date.split("-")[0]),
     };
     try {
-      const res = await fetch("http://localhost:4000/api/", {
+      const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

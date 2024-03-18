@@ -13,7 +13,7 @@ const SignIn = (props: Props) => {
       async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         try {
-            const res = await fetch("http://localhost:4000/api/auth/signin",{
+            const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/auth/signin",{
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",

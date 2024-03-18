@@ -42,7 +42,7 @@ export async function getDaysInMonth(month = dayjs().month(), year = dayjs().yea
 
 async function getEvents() {
   try {
-    const res = await fetch("http://localhost:4000/api/", {
+    const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

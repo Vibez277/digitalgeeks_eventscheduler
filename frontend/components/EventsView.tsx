@@ -51,7 +51,7 @@ const EventsView = (props: Props) => {
     async function getEvents() {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:4000/api/", {
+        const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const EventsView = (props: Props) => {
   function EventCard({ event }: { event: event }) {
     async function handleDelete(id:string){
       try {
-        const res = await fetch("http://localhost:4000/api/delete-event/"+id, {
+        const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/delete-event/"+id, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

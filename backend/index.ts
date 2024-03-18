@@ -6,9 +6,10 @@ import AuthRouter from "./routes/auth_routes";
 import EventsRouter from "./routes/events_routes";
 dotenv.config();
 
+const corsOrigin = "http://localhost:3000"
 const app = express();
 app.use(cors({
-  origin:"http://localhost:3000",
+  origin:corsOrigin,
   credentials:true
 }));
 app.use(cookieParser());

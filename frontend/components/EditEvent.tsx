@@ -24,7 +24,7 @@ const EditEvent = (props: Props) => {
       year: parseInt(data.date.split("-")[0]),
     };
     try {
-      const res = await fetch("http://localhost:4000/api/update-event/"+editContext?.eventId, {
+      const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/update-event/"+editContext?.eventId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
