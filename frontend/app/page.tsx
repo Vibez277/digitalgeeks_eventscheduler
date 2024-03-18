@@ -5,7 +5,6 @@ import { AuthContext } from "@/components/contexts/AuthContext";
 import { IsNewContext } from "@/components/contexts/IsNewContext";
 import { ShowContext } from "@/components/contexts/ShowEventsContext";
 import { getDaysInMonth } from "@/utils/calendar";
-import dayjs, { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -27,7 +26,6 @@ const months = [
 ];
 const date = new Date();
 export default function Home() {
-  const [show, setShow] = React.useState(false);
   const [days, setDays] = React.useState<
     { day: number; isNext: boolean; isPrev: boolean,dayOfWeek:number,isActive:boolean }[]
   >([]);
@@ -39,7 +37,8 @@ export default function Home() {
   const isNewContext = useContext(IsNewContext);
   const auth = useContext(AuthContext);
 
-  if(!auth?.isAuthorized){
+  const e = !auth?.isAuthorized;
+  if(!e){
     router.push('/auth/signin');
     return;
   }
