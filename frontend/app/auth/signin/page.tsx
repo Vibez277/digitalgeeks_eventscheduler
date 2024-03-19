@@ -1,4 +1,5 @@
 "use client"
+import { apiEndpoint } from '@/components/endpoints';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
@@ -13,7 +14,7 @@ const SignIn = (props: Props) => {
       async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         try {
-            const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/auth/signin",{
+            const res = await fetch(apiEndpoint+"/api/auth/signin",{
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",
@@ -23,7 +24,7 @@ const SignIn = (props: Props) => {
             });
             const {message,success} = await res.json();
             if(success){
-                router.push("/");
+                router.push("/home");
             }else{
                 alert(message);
             }

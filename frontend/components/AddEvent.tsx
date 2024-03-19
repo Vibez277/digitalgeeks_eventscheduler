@@ -2,6 +2,7 @@
 import React, { useContext, useState } from "react";
 import { AddContext } from "./contexts/AddEventModalContext";
 import { IsNewContext } from "./contexts/IsNewContext";
+import { apiEndpoint } from "./endpoints";
 
 type Props = {};
 
@@ -24,7 +25,7 @@ const AddEvent = (props: Props) => {
       year: parseInt(data.date.split("-")[0]),
     };
     try {
-      const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
+      const res = await fetch(apiEndpoint+"/api/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -57,3 +57,12 @@ export async function SignUp(req:Request,res:Response,next:NextFunction){
     }
     return res.json({message:"signup successful",success:true}).status(200);
 }
+export async function SignOut(req:Request,res:Response,next:NextFunction){
+    res.cookie("eventsToken", "", {
+        httpOnly: true, 
+        secure: true,
+        sameSite: "strict",
+        maxAge: 1
+    });
+    return res.json({message:"signout successful",success:true}).status(200);
+}

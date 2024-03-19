@@ -1,3 +1,4 @@
+import { apiEndpoint } from "@/components/endpoints";
 import dayjs from "dayjs";
 
 export async function getDaysInMonth(month = dayjs().month(), year = dayjs().year()) {
@@ -42,7 +43,7 @@ export async function getDaysInMonth(month = dayjs().month(), year = dayjs().yea
 
 async function getEvents() {
   try {
-    const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
+    const res = await fetch(apiEndpoint+"/api/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

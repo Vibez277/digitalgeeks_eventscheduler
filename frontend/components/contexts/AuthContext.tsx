@@ -2,6 +2,7 @@
 "use client"
 import { redirect } from 'next/navigation'
 import React, { createContext, useEffect, useState } from 'react'
+import { apiEndpoint } from '../endpoints'
 
 type Props = {
     children:React.ReactNode
@@ -21,7 +22,7 @@ const AuthContextProvider = (props: Props) => {
     useEffect(()=>{
         async function checkAuth(){
             try {
-              const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
+              const res = await fetch(apiEndpoint+"/authorized", {
                 method: "GET",
                 headers: {
                   "Content-Type": "application/json",
@@ -31,7 +32,8 @@ const AuthContextProvider = (props: Props) => {
               const { message, success,user } = await res.json();
               if (success) {
                 setIsAuthorized(true);
-                setUser(user)
+                setUser(user);
+                if(window.location.href.includes("/home"))return; else window.location.href = "/home";
                 return;
               }
             } catch (error) {

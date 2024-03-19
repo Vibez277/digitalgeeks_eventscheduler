@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { EditContext } from "./contexts/EditEventModalContext";
 import { IsNewContext } from "./contexts/IsNewContext";
+import { apiEndpoint } from "./endpoints";
 
 type Props = {};
 
@@ -24,7 +25,7 @@ const EditEvent = (props: Props) => {
       year: parseInt(data.date.split("-")[0]),
     };
     try {
-      const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/update-event/"+editContext?.eventId, {
+      const res = await fetch(apiEndpoint+"/api/update-event/"+editContext?.eventId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +53,7 @@ const EditEvent = (props: Props) => {
   useEffect(()=>{
     async function getEvent(){
       try {
-        const res = await fetch("http://localhost:4000/api/get-event/"+editContext?.eventId, {
+        const res = await fetch(apiEndpoint+"/api/get-event/"+editContext?.eventId, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

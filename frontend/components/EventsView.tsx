@@ -7,6 +7,7 @@ import { FaX } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { IsNewContext } from "./contexts/IsNewContext";
 import { EditContext } from "./contexts/EditEventModalContext";
+import { apiEndpoint } from "./endpoints";
 
 type Props = {
   date?: number;
@@ -51,7 +52,7 @@ const EventsView = (props: Props) => {
     async function getEvents() {
       setLoading(true);
       try {
-        const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/", {
+        const res = await fetch(apiEndpoint+"/api/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -89,7 +90,7 @@ const EventsView = (props: Props) => {
   function EventCard({ event }: { event: event }) {
     async function handleDelete(id:string){
       try {
-        const res = await fetch("https://digitalgeeks-eventscheduler.onrender.com/api/delete-event/"+id, {
+        const res = await fetch(apiEndpoint+"/api/delete-event/"+id, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
